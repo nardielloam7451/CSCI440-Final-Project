@@ -1,1 +1,1 @@
-# csci440-fall2020-private
+# csci-440-fall2020
