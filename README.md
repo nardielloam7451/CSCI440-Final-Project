@@ -22,7 +22,7 @@ $ git remote add upstream https://github.com/msu/csci-440-fall2020.git
 $ git checkout -b <YOUR EMAIL ADDRESS>@montana.edu
 $ git push --set-upstream origin <YOUR EMAIL ADDRESS>@montana.edu
 ```
-```
+
 Whew!  You now have a private copy of the repository on github and are working in your own branch.  You can push and pull to this repository with the standard `git pull` and `git push` commands.
 
 When you want to get an update from the public class repository you can run this command:
