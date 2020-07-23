@@ -11,7 +11,8 @@ Please use the following steps to create a *private* version of this repo for yo
     - Going to <https://github.com/new>
     - Enter the name `csci-440-fall2020`
     - Select `Private`
-- Clone this repository to your local system with `git clone https://github.com/msu/csci-440-fall2020.git`
+    - Navigate to the `Settings` -> `Manage Access` section
+    - Add `1cg` as a collaborator
 - Now run the following git commands, substituting your Github user name and email where required:
 ```bash
 $ git clone https://github.com/msu/csci-440-fall2020.git
@@ -20,6 +21,7 @@ $ git remote set-url origin git@github.com:<YOUR GITHUB USER NAME>/csci-440-fall
 $ git remote add upstream https://github.com/msu/csci-440-fall2020.git
 $ git checkout -b <YOUR EMAIL ADDRESS>@montana.edu
 $ git push --set-upstream origin <YOUR EMAIL ADDRESS>@montana.edu
+```
 ```
 Whew!  You now have a private copy of the repository on github and are working in your own branch.  You can push and pull to this repository with the standard `git pull` and `git push` commands.
 
