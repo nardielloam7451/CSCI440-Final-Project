@@ -3,17 +3,30 @@
 This is the base upstream repository for CSCI 440.  It contains homeworks as well as the class project 
 information.
 
-## Branching
+## Getting Your Copy
 
-After you check this repository out, please create a branch based on your email and **work in that
-directory**:
+Please use the following steps to create a *private* version of this repo for your work:
 
-```shell script
-$ git checkout -b <your email>@montana.edu # creates and switches to the branch
+- Clone this repository to your local system with `git clone https://github.com/msu/csci-440-fall2020.git`
+- Create a *private* repository in your own account by
+    - Going to <https://github.com/new>
+    - Enter the name `csci-440-fall2020`
+    - Select `Private`
+- Now run the following git commands, substituting your Github user name and email where required:
+```bash
+$ git clone https://github.com/msu/csci-440-fall2020.git
+$ cd csci-440-fall2020
+$ git remote set-url origin git@github.com:<your user name>/csci-440-fall2020.git
+$ git remote add upstream https://github.com/msu/csci-440-fall2020.git
+$ git checkout -b <your email address>@montana.edu
+$ git push --set-upstream origin <your email address>@montana.edu
 ```
+Whew!  You now have a private copy of the repository on github and are working in your own branch.  You can push and pull to this repository with the standard `git pull` and `git push` commands.
 
-Do **NOT** work in the master directory.  We will only be pulling the branch named after your email
-in our grading system and **will not see** any work you do in any other branches.
+When you want to get an update from the public class repository you can run this command:
+```
+$ git pull upstream master
+```
 
 ## Homeworks
 
