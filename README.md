@@ -16,7 +16,7 @@ Please use the following steps to create a *private* version of this repo for yo
 ```bash
 $ git clone https://github.com/msu/csci-440-fall2020.git
 $ cd csci-440-fall2020
-$ git remote set-url origin git@github.com:<your user name>/csci-440-fall2020.git
+$ git remote set-url origin git@github.com:<your Github user name>/csci-440-fall2020.git
 $ git remote add upstream https://github.com/msu/csci-440-fall2020.git
 $ git checkout -b <your email address>@montana.edu
 $ git push --set-upstream origin <your email address>@montana.edu
