@@ -13,17 +13,17 @@ Please use the following steps to create a *private* version of this repo for yo
     - Select `Private`
     - Navigate to the `Settings` -> `Manage Access` section
     - Add `1cg` as a collaborator
-- Now run the following git commands, substituting your Github user name and email where required:
+- Now run the following git commands, substituting your Github user name and NetID where required:
 ```bash
 $ git clone https://github.com/msu/csci-440-fall2020.git
 $ cd csci-440-fall2020
 $ git remote set-url origin git@github.com:<YOUR GITHUB USER NAME>/csci-440-fall2020.git
 $ git remote add upstream https://github.com/msu/csci-440-fall2020.git
-$ git checkout -b <YOUR EMAIL ADDRESS>@montana.edu
-$ git push --set-upstream origin <YOUR EMAIL ADDRESS>@montana.edu
+$ git checkout -b <YOUR NETID>
+$ git push --set-upstream origin <YOUR NETID>
 ```
 
-Whew!  You now have a private copy of the repository on github and are working in your own branch.  You can push and pull to this repository with the standard `git pull` and `git push` commands.
+Whew!  You now have a private copy of the repository on github and are working in your own branch, named after your NetID.  You can push and pull to this repository with the standard `git pull` and `git push` commands.
 
 When you want to get an update from the public class repository you can run this command:
 ```
