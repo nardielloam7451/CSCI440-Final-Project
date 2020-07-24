@@ -32,6 +32,16 @@ When you want to get an update from the public class repository you can run this
 $ git pull upstream master
 ```
 
+## Getting Your Public Copy
+
+Next, please fork this repository to your personal account. You will now have two copies of the project, one public and one private.
+
+The private repository will be used for your work and our grading.
+
+The public repository can be used for contibuting back to the class project. DO NOT PUSH WORK CODE TO THIS REPOSITORY
+
+I highly recommend against cloning the public respoitory to your local system, to avoid confusion between the two. You can edit files in the public repository via the web interface, and that will be much safer.
+
 ## Homeworks
 
 Each homework has it's own directory (`/hwk0`, `/hwk1`, etc.).  Please do your work in the homework directory
