@@ -5,6 +5,8 @@ information.
 
 ## Getting Your Copy
 
+Rather than the traditional Forking model, we are going to use a Copy model for the class.
+
 Please use the following steps to create a *private* version of this repo for your work:
 
 - Create a *private* repository in your own account by
@@ -23,7 +25,7 @@ $ git checkout -b <YOUR NETID>
 $ git push --set-upstream origin <YOUR NETID>
 ```
 
-Whew!  You now have a private copy of the repository on github and are working in your own branch, named after your NetID.  You can push and pull to this repository with the standard `git pull` and `git push` commands.
+Whew!  You now have a private copy of the repository on github and are working in your own branch, named after your NetID.  You can push and pull to this repository and branch with the standard `git pull` and `git push` commands.
 
 When you want to get an update from the public class repository you can run this command:
 ```
