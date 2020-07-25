@@ -11,7 +11,7 @@ Please use the following steps to create a *private* version of this repo for yo
 
 - Create a *private* repository in your own account by
     - Going to <https://github.com/new>
-    - Enter the name `csci-440-fall2020`
+    - Enter the name `csci-440-fall2020-private`
     - Select `Private`
     - Navigate to the `Settings` -> `Manage Access` section
     - Add `1cg` as a collaborator
@@ -19,10 +19,8 @@ Please use the following steps to create a *private* version of this repo for yo
 ```bash
 $ git clone https://github.com/msu/csci-440-fall2020.git
 $ cd csci-440-fall2020
-$ git remote set-url origin git@github.com:<YOUR GITHUB USER NAME>/csci-440-fall2020.git
+$ git remote set-url origin git@github.com:<YOUR GITHUB USER NAME>/csci-440-fall2020-private.git
 $ git remote add upstream https://github.com/msu/csci-440-fall2020.git
-$ git checkout -b <YOUR NETID>
-$ git push --set-upstream origin <YOUR NETID>
 ```
 
 Whew!  You now have a private copy of the repository on github and are working in your own branch, named after your NetID.  You can push and pull to this repository and branch with the standard `git pull` and `git push` commands.
@@ -32,7 +30,7 @@ When you want to get an update from the public class repository you can run this
 $ git pull upstream master
 ```
 
-## Getting Your Public Copy (Fork)
+## Getting Your Public Copy & Registering (Fork)
 
 Next, please fork this repository to your personal account. You will now have two copies of the project, one public and one private.
 
@@ -41,6 +39,18 @@ The private repository will be used for your work and our grading.
 The public repository can be used for contibuting back to the class project. DO NOT PUSH WORK CODE TO THIS REPOSITORY
 
 I highly recommend against cloning the public respoitory to your local system, to avoid confusion between the two. You can edit files in the public repository via the web interface, and that will be much safer.
+
+Please add a file to `/repos` named
+
+`<YOUR NET ID>.txt`
+
+with the git URL of your *private* repository, e.g.
+
+`git@github.com:1cg/csci-440-fall2020-private.git`
+
+And then create a pull request against this repository.
+
+We will accept the pull request, and your private work repo will be registered for the class at that point.
 
 ## Homeworks
 
