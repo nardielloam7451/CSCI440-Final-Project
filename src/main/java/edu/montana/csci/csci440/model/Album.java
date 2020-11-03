@@ -25,6 +25,58 @@ public class Album extends Model {
         artistId = results.getLong("ArtistId");
     }
 
+    @Override
+    public boolean verify() {
+        _errors.clear(); // clear any existing errors
+        if (title == null || "".equals(title)) {
+            addError("Title can't be null or blank!");
+        }
+        if (artistId == null) {
+            addError("LastName can't be null!");
+        }
+        return !hasErrors();
+    }
+
+    @Override
+    public boolean create() {
+        if (verify()) {
+            try (Connection conn = DB.connect();
+                 PreparedStatement stmt = conn.prepareStatement(
+                         "INSERT INTO albums (Title, AlbumId, ArtistId) VALUES (?, ?, ?)")) {
+                stmt.setString(1, this.getTitle());
+                stmt.setLong(2, this.getAlbumId());
+                stmt.setLong(3, this.getArtistId());
+                stmt.executeUpdate();
+                return true;
+            } catch (SQLException sqlException) {
+                throw new RuntimeException(sqlException);
+            }
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean update() {
+        if (verify()) {
+            try (Connection conn = DB.connect();
+                 PreparedStatement stmt = conn.prepareStatement(
+                         "UPDATE albums SET Title=?, artistId=? WHERE albumId=?")) {
+                stmt.setString(1, this.getTitle());
+                stmt.setLong(2, this.getArtistId());
+                stmt.setLong(3, this.getAlbumId());
+                stmt.executeUpdate();
+                return true;
+            } catch (SQLException sqlException) {
+                throw new RuntimeException(sqlException);
+            }
+        } else {
+            return false;
+        }
+    }
+
+
+
     public Artist getArtist() {
         return Artist.find(artistId);
     }
