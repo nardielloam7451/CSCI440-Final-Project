@@ -15,6 +15,7 @@ public class Album extends Model {
     Long albumId;
     Long artistId;
     String title;
+    Long newId;
 
     public Album() {
     }
@@ -42,10 +43,11 @@ public class Album extends Model {
         if (verify()) {
             try (Connection conn = DB.connect();
                  PreparedStatement stmt = conn.prepareStatement(
-                         "INSERT INTO albums (Title, ArtistId) VALUES (?, ?)")) {
+                         "INSERT INTO albums(Title, ArtistId) VALUES (?, ?)")) {
                 stmt.setString(1, this.getTitle());
                 stmt.setLong(2, this.getArtistId());
                 stmt.executeUpdate();
+                albumId = DB.getLastID(conn);
                 return true;
             } catch (SQLException sqlException) {
                 throw new RuntimeException(sqlException);
@@ -101,7 +103,7 @@ public class Album extends Model {
     }
 
     public Long getAlbumId() {
-        return albumId;
+        return this.albumId;
     }
 
     public void setAlbum(Album album) {
@@ -127,9 +129,10 @@ public class Album extends Model {
     public static List<Album> all(int page, int count) {
         try (Connection conn = DB.connect();
              PreparedStatement stmt = conn.prepareStatement(
-                     "SELECT * FROM albums LIMIT ?"
+                     "SELECT * FROM albums LIMIT ? OFFSET ?"
              )) {
             stmt.setInt(1, count);
+            stmt.setInt(2, count*(page-1));
             ResultSet results = stmt.executeQuery();
             List<Album> resultList = new LinkedList<>();
             while (results.next()) {

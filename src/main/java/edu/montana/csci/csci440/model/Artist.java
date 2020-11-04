@@ -52,6 +52,36 @@ public class Artist extends Model {
         }
     }
 
+    @Override
+    public void delete() {
+        try (Connection conn = DB.connect();
+             PreparedStatement stmt = conn.prepareStatement(
+                     "DELETE FROM artists WHERE ArtistId=?")) {
+            stmt.setLong(1, this.getArtistId());
+            stmt.executeUpdate();
+        } catch (SQLException sqlException) {
+            throw new RuntimeException(sqlException);
+        }
+    }
+
+    @Override
+    public boolean create() {
+        if (verify()) {
+            try (Connection conn = DB.connect();
+                 PreparedStatement stmt = conn.prepareStatement(
+                         "INSERT INTO artists (Name) VALUES (?)")) {
+                stmt.setString(1, this.getName());
+                stmt.executeUpdate();
+                artistId = DB.getLastID(conn);
+                return true;
+            } catch (SQLException sqlException) {
+                throw new RuntimeException(sqlException);
+            }
+        } else {
+            return false;
+        }
+    }
+
     public List<Album> getAlbums(){
         return Album.getForArtist(artistId);
     }
@@ -80,11 +110,10 @@ public class Artist extends Model {
         int lastID =0;
         try (Connection conn = DB.connect();
              PreparedStatement stmt = conn.prepareStatement(
-                     "SELECT * FROM artists WHERE ArtistId > ? LIMIT ?"
+                     "SELECT * FROM artists LIMIT ? OFFSET ?"
              )) {
-            stmt.setInt(1, lastID);
-            stmt.setInt(2, count);
-            lastID =count;
+            stmt.setInt(1, count);
+            stmt.setInt(2, count*(page-1));
             ResultSet results = stmt.executeQuery();
             List<Artist> resultList = new LinkedList<>();
             while (results.next()) {

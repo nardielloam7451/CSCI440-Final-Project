@@ -25,8 +25,18 @@ public class Playlist extends Model {
 
 
     public List<Track> getTracks(){
-        // TODO implement, order by track name
-        return Collections.emptyList();
+        try (Connection conn = DB.connect();
+             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM tracks WHERE PlaylistId=?")) {
+            stmt.setLong(1, this.getPlaylistId());
+            ResultSet results = stmt.executeQuery();
+            if (results.next()) {
+                return (List<Track>) results;
+            } else {
+                return null;
+            }
+        } catch (SQLException sqlException) {
+            throw new RuntimeException(sqlException);
+        }
     }
 
     public Long getPlaylistId() {
@@ -48,9 +58,10 @@ public class Playlist extends Model {
     public static List<Playlist> all(int page, int count) {
         try (Connection conn = DB.connect();
              PreparedStatement stmt = conn.prepareStatement(
-                     "SELECT * FROM playlists LIMIT ?"
+                     "SELECT * FROM playlists LIMIT ? OFFSET ?"
              )) {
             stmt.setInt(1, count);
+            stmt.setInt(2, count*(page-1));
             ResultSet results = stmt.executeQuery();
             List<Playlist> resultList = new LinkedList<>();
             while (results.next()) {
