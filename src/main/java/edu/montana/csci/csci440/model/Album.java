@@ -32,7 +32,7 @@ public class Album extends Model {
             addError("Title can't be null or blank!");
         }
         if (artistId == null) {
-            addError("LastName can't be null!");
+            addError("Artist Id  can't be null!");
         }
         return !hasErrors();
     }
@@ -46,7 +46,6 @@ public class Album extends Model {
                 stmt.setString(1, this.getTitle());
                 stmt.setLong(2, this.getArtistId());
                 stmt.executeUpdate();
-
                 return true;
             } catch (SQLException sqlException) {
                 throw new RuntimeException(sqlException);
