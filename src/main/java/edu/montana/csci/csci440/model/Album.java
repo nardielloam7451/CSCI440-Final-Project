@@ -46,6 +46,7 @@ public class Album extends Model {
                 stmt.setString(1, this.getTitle());
                 stmt.setLong(2, this.getArtistId());
                 stmt.executeUpdate();
+
                 return true;
             } catch (SQLException sqlException) {
                 throw new RuntimeException(sqlException);
