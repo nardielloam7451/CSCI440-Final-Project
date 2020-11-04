@@ -254,6 +254,9 @@ public class Track extends Model {
         query += " LIMIT ?";
         args.add(count);
 
+        query +="OFFSET ?";
+        args.add(count*(page-1));
+
         try (Connection conn = DB.connect();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             for (int i = 0; i < args.size(); i++) {
@@ -317,7 +320,7 @@ public class Track extends Model {
     public static List<Track> all(int page, int count, String orderBy) {
         try (Connection conn = DB.connect();
              PreparedStatement stmt = conn.prepareStatement(
-                     "SELECT * FROM tracks LIMIT ? OFFSET ?"
+                     "SELECT * FROM tracks GROUP BY "+ orderBy +" LIMIT ? OFFSET ?"
              )) {
             stmt.setInt(1, count);
             stmt.setInt(2, count*(page-1));
