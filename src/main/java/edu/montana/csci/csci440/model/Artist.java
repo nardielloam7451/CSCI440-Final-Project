@@ -15,6 +15,7 @@ public class Artist extends Model {
 
     Long artistId;
     String name;
+    String OriginalName;
 
     public Artist() {
     }
@@ -41,7 +42,7 @@ public class Artist extends Model {
                          "UPDATE artists SET Name=? WHERE ArtistId=?")) {
                 stmt.setString(1, this.getName());
                 stmt.setLong(2, this.getArtistId());
-                stmt.executeUpdate();
+                int i = stmt.executeUpdate();
                 return true;
             } catch (SQLException sqlException) {
                 throw new RuntimeException(sqlException);
