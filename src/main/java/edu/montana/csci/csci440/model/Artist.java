@@ -73,6 +73,7 @@ public class Artist extends Model {
                 stmt.setString(1, this.getName());
                 stmt.executeUpdate();
                 artistId = DB.getLastID(conn);
+                OriginalName = this.getName();
                 return true;
             } catch (SQLException sqlException) {
                 throw new RuntimeException(sqlException);
