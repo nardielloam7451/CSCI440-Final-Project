@@ -15,7 +15,6 @@ public class Album extends Model {
     Long albumId;
     Long artistId;
     String title;
-    Long newId;
 
     public Album() {
     }

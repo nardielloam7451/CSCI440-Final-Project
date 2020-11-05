@@ -132,7 +132,7 @@ public class Track extends Model {
                 stmt.setString(1, this.getName());
                 stmt.setLong(2, this.getAlbumId());
                 stmt.setBigDecimal(3, BigDecimal.valueOf(1));
-                stmt.execute();
+                stmt.executeUpdate();
                 trackId = DB.getLastID(conn);
                 return true;
             } catch (SQLException sqlException) {
