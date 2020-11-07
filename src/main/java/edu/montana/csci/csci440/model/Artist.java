@@ -2,6 +2,7 @@ package edu.montana.csci.csci440.model;
 
 import edu.montana.csci.csci440.util.DB;
 
+import javax.lang.model.util.Elements;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,11 +19,13 @@ public class Artist extends Model {
     String OriginalName;
 
     public Artist() {
+        OriginalName = name;
     }
 
     private Artist(ResultSet results) throws SQLException {
         name = results.getString("Name");
         artistId = results.getLong("ArtistId");
+        OriginalName = name;
     }
 
     @Override
@@ -39,11 +42,12 @@ public class Artist extends Model {
         if (verify()) {
             try (Connection conn = DB.connect();
                  PreparedStatement stmt = conn.prepareStatement(
-                         "UPDATE artists SET Name=? WHERE ArtistId=?")) {
+                         "UPDATE artists SET Name=? WHERE ArtistId=? and NAME=?")) {
                 stmt.setString(1, this.getName());
                 stmt.setLong(2, this.getArtistId());
+                stmt.setString(3, OriginalName);
                 int i = stmt.executeUpdate();
-                return true;
+                return i>0;
             } catch (SQLException sqlException) {
                 throw new RuntimeException(sqlException);
             }
@@ -100,6 +104,7 @@ public class Artist extends Model {
     }
 
     public void setName(String name) {
+        OriginalName= this.name;
         this.name = name;
     }
 

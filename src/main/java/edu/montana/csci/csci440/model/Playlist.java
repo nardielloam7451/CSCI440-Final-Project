@@ -18,7 +18,7 @@ public class Playlist extends Model {
     public Playlist() {
     }
 
-    private Playlist(ResultSet results) throws SQLException {
+    public Playlist(ResultSet results) throws SQLException {
         name = results.getString("Name");
         playlistId = results.getLong("PlaylistId");
     }
@@ -26,14 +26,13 @@ public class Playlist extends Model {
 
     public List<Track> getTracks(){
         try (Connection conn = DB.connect();
-             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM tracks WHERE PlaylistId=?")) {
+             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM tracks JOIN playlist_track on playlist_track.TrackId=tracks.TrackId JOIN playlists on playlists.PlaylistId=playlist_track.PlaylistId WHERE playlists.PlaylistId=? ORDER By tracks.name")) {
             stmt.setLong(1, this.getPlaylistId());
             ResultSet results = stmt.executeQuery();
-            if (results.next()) {
-                return (List<Track>) results;
-            } else {
-                return null;
-            }
+            List<Track> resultList= new LinkedList<>();
+            while (results.next()) {
+                resultList.add(new Track(results));
+            } return resultList;
         } catch (SQLException sqlException) {
             throw new RuntimeException(sqlException);
         }

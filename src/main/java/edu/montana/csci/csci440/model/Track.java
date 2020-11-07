@@ -38,7 +38,7 @@ public class Track extends Model {
         unitPrice = new BigDecimal("0");
     }
 
-    private Track(ResultSet results) throws SQLException {
+    public Track(ResultSet results) throws SQLException {
         name = results.getString("Name");
         milliseconds = results.getLong("Milliseconds");
         bytes = results.getLong("Bytes");
@@ -160,7 +160,17 @@ public class Track extends Model {
         return null;
     }
     public List<Playlist> getPlaylists(){
-        return Collections.emptyList();
+        try (Connection conn = DB.connect();
+             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM playlists JOIN playlist_track on playlist_track.PlaylistId=playlists.PlaylistId JOIN tracks on tracks.TrackId=playlist_track.TrackId WHERE tracks.TrackId=? ORDER By playlists.Name")) {
+            stmt.setLong(1, this.getTrackId());
+            ResultSet results = stmt.executeQuery();
+            List<Playlist> resultList= new LinkedList<>();
+            while (results.next()) {
+                resultList.add(new Playlist(results));
+            } return resultList;
+        } catch (SQLException sqlException) {
+            throw new RuntimeException(sqlException);
+        }
     }
 
     public Long getTrackId() {
