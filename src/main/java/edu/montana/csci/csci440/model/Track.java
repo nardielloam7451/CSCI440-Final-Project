@@ -272,6 +272,21 @@ public class Track extends Model {
             args.add(artistId);
         }
 
+        if (albumId!=null){
+            query+=" AND AlbumId=? ";
+            args.add(albumId);
+        }
+
+        if (maxRuntime!=null){
+            query+=" AND Milliseconds<=? ";
+            args.add(maxRuntime);
+        }
+
+        if (minRuntime!=null){
+            query+=" AND Milliseconds>=?";
+            args.add(minRuntime);
+        }
+
         query += " LIMIT ?";
         args.add(count);
 

@@ -95,7 +95,7 @@ public class Artist extends Model {
         return artistId;
     }
 
-    public void setArtist(Artist artist) {
+    public void setArtistId(Artist artist) {
         this.artistId = artist.getArtistId();
     }
 

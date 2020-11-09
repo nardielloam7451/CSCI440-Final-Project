@@ -139,7 +139,7 @@ public class Employee extends Model {
     }
 
     public Long getReportsTo() {
-        return reportsTo;
+        return this.reportsTo;
     }
 
     public void setReportsTo(Long reportsTo) {
