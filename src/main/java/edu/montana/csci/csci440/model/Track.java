@@ -357,7 +357,7 @@ public class Track extends Model {
     public static List<Track> all(int page, int count, String orderBy) {
         try (Connection conn = DB.connect();
              PreparedStatement stmt = conn.prepareStatement(
-                     "SELECT * FROM tracks GROUP BY "+orderBy+" LIMIT ? OFFSET ?"
+                     "SELECT * FROM tracks ORDER BY "+orderBy+"  LIMIT ? OFFSET ?"
              )) {
             stmt.setInt(1, count);
             stmt.setInt(2, count*(page-1));
